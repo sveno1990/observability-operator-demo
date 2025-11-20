@@ -18,7 +18,7 @@ spec:
           - monitoring-stack
   prometheusConfig:
     enableRemoteWriteReceiver: true
-    replicas: 2
+    replicas: 1
   resourceSelector: {}
   resources:
     limits:
