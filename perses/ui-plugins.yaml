@@ -1,0 +1,18 @@
+apiVersion: observability.openshift.io/v1alpha1
+kind: UIPlugin
+metadata:
+  name: monitoring
+spec:
+  monitoring:
+    incidents:
+      enabled: true
+    perses:
+      enabled: true
+  type: Monitoring
+---
+apiVersion: observability.openshift.io/v1alpha1
+kind: UIPlugin
+metadata:
+  name: dashboards
+spec:
+  type: Dashboards

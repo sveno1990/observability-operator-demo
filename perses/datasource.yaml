@@ -1,0 +1,14 @@
+apiVersion: perses.dev/v1alpha1
+kind: PersesDatasource
+metadata:
+  name: prometheusdemo
+spec:
+  config:
+    default: true
+    plugin:
+      kind: PrometheusDatasource
+      spec:
+        proxy:
+          kind: HTTPProxy
+          spec:
+            url: 'http://sample-monitoring-stack-prometheus.monitoring-stack.svc.cluster.local:9090'
