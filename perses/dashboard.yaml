@@ -4,7 +4,7 @@ metadata:
   name: kubernetes-pod-resources-overview
 spec:
   display:
-    name: Test Sven
+    name: Resources
   duration: 1h
   layouts:
     - kind: Grid
