@@ -1,0 +1,16 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: grafanadashboard-sample
+  namespace: monitoring-stack
+spec:
+  allowCrossNamespaceImport: false
+  datasources:
+    - datasourceName: Prometheus
+      inputName: DS_PROMETHEUS
+  folder: jvm
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  resyncPeriod: 10m0s
+  url: 'https://grafana.com/api/dashboards/4701/revisions/10/download'

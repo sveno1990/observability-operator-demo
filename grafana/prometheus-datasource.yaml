@@ -1,0 +1,21 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDatasource
+metadata:
+  name: grafanadatasource-sample
+  namespace: monitoring-stack
+spec:
+  allowCrossNamespaceImport: false
+  datasource:
+    access: proxy
+    isDefault: true
+    jsonData:
+      timeInterval: 5s
+      tlsSkipVerify: true
+    name: Prometheus
+    type: prometheus
+    uid: DS_PROMETHEUS
+    url: 'http://sample-monitoring-stack-prometheus:9090'
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  resyncPeriod: 10m0s

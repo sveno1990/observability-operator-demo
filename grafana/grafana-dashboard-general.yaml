@@ -1,0 +1,13 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: grafanadashboard-sample2
+  namespace: monitoring-stack
+spec:
+  allowCrossNamespaceImport: false
+  folder: kubernetes
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  resyncPeriod: 10m0s
+  url: 'https://grafana.com/api/dashboards/15758/revisions/44/download'

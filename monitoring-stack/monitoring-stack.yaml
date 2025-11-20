@@ -1,0 +1,30 @@
+apiVersion: monitoring.rhobs/v1alpha1
+kind: MonitoringStack
+metadata:
+  name: sample-monitoring-stack
+  labels:
+    mso: example
+spec:
+  alertmanagerConfig:
+    disabled: false
+  createClusterRoleBindings: CreateClusterRoleBindings
+  logLevel: debug
+  namespaceSelector:
+    matchExpressions:
+      - key: kubernetes.io/metadata.name
+        operator: In
+        values:
+          - superheroes
+          - monitoring-stack
+  prometheusConfig:
+    enableRemoteWriteReceiver: true
+    replicas: 2
+  resourceSelector: {}
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  retention: 1d
