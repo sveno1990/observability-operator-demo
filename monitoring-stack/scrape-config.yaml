@@ -1,0 +1,64 @@
+apiVersion: monitoring.rhobs/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: prometheus-scrape
+  namespace: monitoring-stack
+spec:
+  honorLabels: true
+  jobName: kubernetes-pods
+  kubernetesSDConfigs:
+    - role: Pod
+  relabelings:
+    - action: keep
+      regex: 'true'
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scrape
+    - action: drop
+      regex: 'true'
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scrape_slow
+    - action: replace
+      regex: (https?)
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scheme
+      targetLabel: __scheme__
+    - action: replace
+      regex: (.+)
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_path
+      targetLabel: __metrics_path__
+    - action: replace
+      regex: '(\d+);(([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})'
+      replacement: '[$2]:$1'
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        - __meta_kubernetes_pod_ip
+      targetLabel: __address__
+    - action: replace
+      regex: '(\d+);((([0-9]+?)(\.|$)){4})'
+      replacement: '$2:$1'
+      sourceLabels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        - __meta_kubernetes_pod_ip
+      targetLabel: __address__
+    - action: labelmap
+      regex: __meta_kubernetes_pod_annotation_prometheus_io_param_(.+)
+      replacement: __param_$1
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_namespace
+      targetLabel: namespace
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_pod_name
+      targetLabel: pod
+    - action: drop
+      regex: Pending|Succeeded|Failed|Completed
+      sourceLabels:
+        - __meta_kubernetes_pod_phase
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_pod_node_name
+      targetLabel: node
