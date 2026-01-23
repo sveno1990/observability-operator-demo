@@ -1,0 +1,7 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: grafana-proxy
+data:
+  session_secret: Y2hhbmdlIG1lCg==
+type: Opaque
