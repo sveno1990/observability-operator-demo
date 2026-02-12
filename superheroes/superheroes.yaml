@@ -146,7 +146,7 @@ spec:
           envFrom:
             - secretRef:
                 name: locations-db-config
-          image: mariadb:12-ubi
+          image: docker.io/mariadb:12-ubi
           name: locations-db
           ports:
             - containerPort: 3306
