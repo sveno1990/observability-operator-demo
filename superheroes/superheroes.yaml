@@ -653,7 +653,7 @@ spec:
         - envFrom:
             - secretRef:
                 name: villains-db-config
-          image: postgres:18
+          image: docker.io/postgres:18
           name: villains-db
           ports:
             - containerPort: 5432
@@ -970,7 +970,7 @@ spec:
         - envFrom:
             - secretRef:
                 name: heroes-db-config
-          image: postgres:18
+          image: docker.io/postgres:18
           name: heroes-db
           ports:
             - containerPort: 5432
